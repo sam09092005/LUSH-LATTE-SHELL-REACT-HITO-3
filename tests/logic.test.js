@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {products} from '../src/data/products.js';import {filterProducts,addCartItem,changeQuantity,cartTotal} from '../src/logic.js';
+test('Catálogo conserva 28 productos e identificadores únicos',()=>{assert.equal(products.length,28);assert.equal(new Set(products.map(p=>p.id)).size,28)});
+test('Filtra categoría y búsqueda simultáneamente',()=>{const r=filterProducts(products,{category:'clasicos',search:'  LATTE  '});assert.deepEqual(r.map(p=>p.name),['Latte']);assert.equal(filterProducts(products,{category:'clasicos',search:'pistacho'}).length,0)});
+test('Todos permite buscar en otras categorías y descripción',()=>{assert.equal(filterProducts(products,{category:'todos',search:'pistacho'}).length,1);assert.equal(filterProducts(products,{category:'todos',search:'hojaldre'}).length,1)});
+test('Borrar búsqueda devuelve solo categoría seleccionada',()=>{assert.equal(filterProducts(products,{category:'clasicos',search:''}).length,6)});
+test('Carrito combina unidades y calcula total; reduce y elimina',()=>{const item={key:'c1',name:'Espresso',price:10};let c=addCartItem([],item);c=addCartItem(c,item);assert.equal(c[0].qty,2);assert.equal(cartTotal(c),20);c=changeQuantity(c,'c1',-1);assert.equal(cartTotal(c),10);assert.deepEqual(changeQuantity(c,'c1',-1),[])});
+test('Configuraciones diferentes se conservan como líneas separadas',()=>{let c=addCartItem([],{key:'latte-avena',price:23});c=addCartItem(c,{key:'latte-entera',price:20});assert.equal(c.length,2);assert.equal(cartTotal(c),43)});
