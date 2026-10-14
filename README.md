@@ -65,3 +65,41 @@ La carpeta `evidencia` incluye capturas reales de Inicio, Menú, Pedido y Menú 
 ## Límites del prototipo
 
 Los formularios son una demostración académica: no envían correos, no guardan pedidos en un servidor y no cobran pagos. Conservamos los recursos originales. `Latte` e `Iced Latte Fresco` comparten exactamente la misma imagen: es una corrección pendiente del catálogo original. No se ha certificado la correspondencia visual de todas las fotografías.
+
+## Segunda evaluación: SPA y formulario funcional
+
+Lush Latte es una aplicación React que permite navegar entre
+vistas sin recargar toda la página.
+
+### Flujo principal
+Menú → Personalizar producto → Pedido → Agregar al carrito →
+Completar formulario → Confirmar pedido de demostración.
+
+### Rutas
+Inicio, Menú, Pedido, Nosotros, Locaciones y Contacto.
+La navegación utiliza React Router con HashRouter.
+
+### Manejo de estado
+React mantiene la categoría, la búsqueda y el carrito al cambiar
+de vista. Las cantidades y opciones del pedido actualizan el total.
+
+### Formulario
+El formulario solicita nombre y teléfono mediante campos
+obligatorios. Al completarlo, muestra una confirmación local.
+No envía pedidos a un servidor ni procesa pagos reales.
+
+### Accesibilidad
+Los campos del pedido tienen etiquetas. El mensaje de confirmación
+utiliza role="status" para facilitar su anuncio por lectores de pantalla.
+
+### Prueba realizada
+Se comprobó el flujo de personalización, agregar al carrito,
+completar el formulario con datos ficticios y mostrar la confirmación.
+
+### Evidencias
+La carpeta evidencia contiene capturas del proyecto.
+Las evidencias adicionales del formulario se presentan en Canva.
+
+### Ejecutar
+npm install
+npm run dev
